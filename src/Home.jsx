@@ -2,12 +2,11 @@ import { motion } from 'motion/react';
 
 const Home = () => {
   const images = [
-    '/landing_photos/IMG_0374.jpg',
+    '/landing_photos/IMG_8843.jpg',
     '/landing_photos/IMG_0710.jpg',
-    '/landing_photos/IMG_0748.jpg',
-    '/landing_photos/IMG_0757.jpg',
-    '/landing_photos/IMG_0928.jpg',
     '/landing_photos/IMG_2288.jpg',
+    '/landing_photos/IMG_3475.jpg',
+    '/landing_photos/IMG_0928.jpg',
     '/landing_photos/IMG_2828.jpg',
     '/landing_photos/IMG_2834.jpg',
     '/landing_photos/IMG_2938.jpg',
@@ -18,7 +17,7 @@ const Home = () => {
   const story = [
     {
       year: '2023',
-      text: 'Awal pertama bertemu di kedai kopi ekman, kala itu yasmin pulang dari kampusnya, dan memesan 2 telor rebus setengah matang',
+      text: 'Awal pertemuan Thomi dan Yasmin di kedai kopi eyckman dan saling mengenal diri masing". Karena keselerasannya, akhirnya mereka memutuskan untuk menjalin hubungan',
     },
     {
       year: '2024',
@@ -132,7 +131,7 @@ const Home = () => {
             className='relative rounded-2xl overflow-hidden shadow-sm'
           >
             <img
-              src='/landing_photos/IMG_2288.jpg'
+              src='/landing_photos/IMG_2833.jpg'
               alt='Shafira Yasmin'
               className='w-full h-96 object-cover'
             />
@@ -142,7 +141,7 @@ const Home = () => {
                 Shafira Yasmin
               </div>
               <div className='mt-2 text-sm text-white/90'>
-                Putri pertama dari Bapak Sambodo dan Ibu Devi Yasmine
+                Putri pertama dari Bapak Sambodo dan Ibu Devie
               </div>
             </div>
             <div className='absolute left-2 top-2 bg-white/85 text-gray-800 text-[11px] px-2 py-1 rounded-full ring-1 ring-black/10'>
@@ -169,7 +168,7 @@ const Home = () => {
                 Thomi Jasir
               </div>
               <div className='mt-2 text-sm text-white/90'>
-                Putra pertama dari Bapak Agus dan Ibu Nike
+                Putra pertama dari Bapak Agus dan Ibu Ineke
               </div>
             </div>
             <div className='absolute left-2 top-2 bg-white/85 text-gray-800 text-[11px] px-2 py-1 rounded-full ring-1 ring-black/10'>
@@ -221,7 +220,7 @@ const Home = () => {
             <div className='text-sm text-gray-600'>08.00 WIB</div>
           </div>
           <div>
-            <div className='font-medium'>Masjid Agung Al Ukuwwah</div>
+            <div className='font-medium'>Al-Ukhuwwah Great Mosque</div>
             <div className='text-sm text-gray-600'>
               Jalan Wastukencana No.27, Bandung
             </div>

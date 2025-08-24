@@ -30,9 +30,9 @@ function App() {
     <div className='relative h-screen w-full max-w-md mx-auto overflow-hidden'>
       <div
         className='absolute inset-0 bg-cover bg-center bg-no-repeat'
-        style={{ backgroundImage: "url('/landing_photos/IMG_2938.jpg')" }}
+        style={{ backgroundImage: "url('/landing_photos/IMG_8898.jpg')" }}
       />
-      <div className='pointer-events-none absolute inset-0 bg-black/40' />
+      <div className='pointer-events-none absolute inset-0 bg-black/20' />
       <div className='pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_50%,rgba(0,0,0,0.6)_100%)]' />
 
       <div className='relative z-10 h-full flex flex-col mb-1'>
