@@ -1,4 +1,52 @@
+import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
+
+// Inline icons
+const IconCalendar = ({ className = 'w-4 h-4' }) => (
+  <svg
+    className={className}
+    viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    strokeWidth='1.8'
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    aria-hidden='true'
+  >
+    <rect x='3' y='5' width='18' height='16' rx='2'></rect>
+    <path d='M16 3v4M8 3v4M3 9h18'></path>
+  </svg>
+);
+const IconClock = ({ className = 'w-4 h-4' }) => (
+  <svg
+    className={className}
+    viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    strokeWidth='1.8'
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    aria-hidden='true'
+  >
+    <circle cx='12' cy='12' r='9'></circle>
+    <path d='M12 7v5l3 2'></path>
+  </svg>
+);
+const IconMapPin = ({ className = 'w-4 h-4' }) => (
+  <svg
+    className={className}
+    viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    strokeWidth='1.8'
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    aria-hidden='true'
+  >
+    <path d='M12 21s7-5.5 7-11a7 7 0 0 0-14 0c0 5.5 7 11 7 11z'></path>
+    <circle cx='12' cy='10' r='3'></circle>
+  </svg>
+);
 
 const Home = () => {
   const images = [
@@ -12,6 +60,7 @@ const Home = () => {
     '/landing_photos/IMG_2938.jpg',
     '/landing_photos/IMG_4485.jpg',
     '/landing_photos/IMG_9092.jpg',
+    '/landing_photos/IMG_0123.jpg',
   ];
 
   const story = [
@@ -25,7 +74,7 @@ const Home = () => {
     },
     {
       year: '2025',
-      text: 'Memutuskan untuk menyegerakan pernikahan kami, untuk mempersiapkan perjalanan yang diridhai allah',
+      text: 'Memutuskan untuk menyegerakan akad nikah kami, untuk mempersiapkan perjalanan yang diridhai allah',
     },
   ];
 
@@ -50,6 +99,34 @@ const Home = () => {
 
   const dirFor = (i) =>
     i % 3 === 0 ? 'left' : i % 3 === 1 ? 'right' : 'bottom';
+
+  // Countdown to 22 Sep 2025 08:00 WIB (UTC+7 => 01:00Z)
+  const eventStart = new Date('2025-09-22T01:00:00Z');
+  const [remaining, setRemaining] = useState({ d: 0, h: 0, m: 0, s: 0 });
+
+  useEffect(() => {
+    const tick = () => {
+      const now = new Date();
+      const diffMs = eventStart.getTime() - now.getTime();
+      const totalSec = Math.max(0, Math.floor(diffMs / 1000));
+      let rem = totalSec;
+      const d = Math.floor(rem / 86400);
+      rem -= d * 86400;
+      const h = Math.floor(rem / 3600);
+      rem -= h * 3600;
+      const m = Math.floor(rem / 60);
+      const s = rem - m * 60;
+      setRemaining({ d, h, m, s });
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const pad = (n) => String(n).padStart(2, '0');
+
+  const googleCalUrl =
+    'https://www.google.com/calendar/render?action=TEMPLATE&text=Wedding%20Thomi%20Jasir%20%26%20Shafira%20Yasmin&dates=20250922T010000Z/20250922T030000Z&details=Undangan%20akad nikah%20Thomi%20Jasir%20%26%20Shafira%20Yasmin&location=Al-Ukhuwwah%20Great%20Mosque%2C%20Jalan%20Wastukencana%20No.27%2C%20Bandung';
 
   return (
     <div className='max-w-sm mx-auto px-5 py-12 space-y-16'>
@@ -78,7 +155,7 @@ const Home = () => {
         </h2>
         <p className='text-sm leading-relaxed text-gray-700'>
           Dengan memohon rahmat dan ridha Allah Subhanahu Wa Ta'ala, kami
-          mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan kami.
+          mengundang Bapak/Ibu/Saudara/i untuk hadir pada akad kami.
         </p>
         <p className='font-script text-3xl text-gray-900'>Thomi Jasir</p>
         <p className='text-sm text-gray-500'>&</p>
@@ -109,6 +186,40 @@ const Home = () => {
           <div className='mt-2 text-xs tracking-widest text-gray-500'>
             Q.S. Ar-Rum : 21
           </div>
+        </div>
+      </motion.section>
+
+      {/* Countdown */}
+      <motion.section
+        variants={fadeIn('bottom', 0.05)}
+        initial='hidden'
+        whileInView='show'
+        viewport={{ once: true, amount: 0.3 }}
+        className='space-y-3'
+      >
+        <h2 className='font-display text-center text-2xl'>Hitung Mundur</h2>
+        <div className='grid grid-cols-4 gap-2'>
+          {[
+            { label: 'Hari', value: remaining.d },
+            { label: 'Jam', value: pad(remaining.h) },
+            { label: 'Menit', value: pad(remaining.m) },
+            { label: 'Detik', value: pad(remaining.s) },
+          ].map((item, i) => (
+            <motion.div
+              key={item.label}
+              variants={fadeIn(i % 2 === 0 ? 'left' : 'right', 0)}
+              initial='hidden'
+              whileInView='show'
+              viewport={{ once: true, amount: 0.5 }}
+              className='bg-white rounded-xl p-3 text-center shadow-sm'
+            >
+              <div className='text-2xl font-semibold'>{item.value}</div>
+              <div className='text-xs text-gray-500'>{item.label}</div>
+            </motion.div>
+          ))}
+        </div>
+        <div className='text-center text-xs text-gray-500'>
+          Menuju 22 September 2025 pukul 08.00 WIB
         </div>
       </motion.section>
 
@@ -212,15 +323,23 @@ const Home = () => {
         viewport={{ once: true, amount: 0.3 }}
         className='space-y-4'
       >
-        <h2 className='font-display text-center text-2xl'>Acara Kami</h2>
+        <h2 className='font-display text-center text-2xl'>Akad Nikah Kami</h2>
         <div className='bg-white rounded-2xl p-5 shadow-sm space-y-3'>
-          <div>
-            <div className='text-sm text-gray-600'>Senin</div>
-            <div className='font-display text-xl'>22 September 2025</div>
-            <div className='text-sm text-gray-600'>08.00 WIB</div>
+          <div className='space-y-1'>
+            <div className='flex items-center gap-2 text-sm text-gray-700'>
+              <IconCalendar className='w-4 h-4' />
+              <span>Senin, 22 September 2025</span>
+            </div>
+            <div className='flex items-center gap-2 text-sm text-gray-700'>
+              <IconClock className='w-4 h-4' />
+              <span>08.00 WIB</span>
+            </div>
           </div>
-          <div>
-            <div className='font-medium'>Al-Ukhuwwah Great Mosque</div>
+          <div className='space-y-1'>
+            <div className='flex items-center gap-2 font-medium'>
+              <IconMapPin className='w-4 h-4' />
+              <span>Al-Ukhuwwah Great Mosque</span>
+            </div>
             <div className='text-sm text-gray-600'>
               Jalan Wastukencana No.27, Bandung
             </div>
@@ -229,9 +348,19 @@ const Home = () => {
             href='https://maps.app.goo.gl/8rAmXn8E4Nwk2ovN8'
             target='_blank'
             rel='noreferrer'
-            className='inline-block w-full text-center py-2 rounded-full border border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-colors'
+            className='inline-flex items-center justify-center gap-2 w-full text-center py-2 rounded-full border border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-colors'
           >
+            <IconMapPin className='w-4 h-4' />
             Google Maps
+          </a>
+          <a
+            href={googleCalUrl}
+            target='_blank'
+            rel='noreferrer'
+            className='inline-flex items-center justify-center gap-2 w-full text-center py-2 rounded-full border border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-colors'
+          >
+            <IconCalendar className='w-4 h-4' />
+            Tambah ke Google Calendar
           </a>
         </div>
       </motion.section>
@@ -310,11 +439,11 @@ const Home = () => {
         <h2 className='font-display text-2xl'>Terima Kasih</h2>
         <p className='text-sm text-gray-700'>
           Menjadi kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i dapat hadir
-          di acara pernikahan kami.
+          di acara akad nikah kami.
         </p>
         <p className='text-sm text-gray-700'>
           Terima kasih atas segala ucapan, doa, dan perhatian yang diberikan.
-          Sampai jumpa di hari pernikahan kami.
+          Sampai jumpa di hari akad nikah kami.
         </p>
       </motion.section>
     </div>

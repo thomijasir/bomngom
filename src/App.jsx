@@ -13,7 +13,7 @@ function App() {
 
   const handleOpen = async () => {
     try {
-      await audio.play();
+      //await audio.play();
     } catch (e) {
       console.warn('Audio play failed:', e);
     } finally {
