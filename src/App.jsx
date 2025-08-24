@@ -27,7 +27,7 @@ function App() {
 
   // Section Home
   return (
-    <div className='relative h-screen w-full max-w-md mx-auto overflow-hidden'>
+    <div className='relative h-[calc(100dvh-env(safe-area-inset-bottom))] w-full max-w-md mx-auto overflow-hidden'>
       <div
         className='absolute inset-0 bg-cover bg-center bg-no-repeat'
         style={{ backgroundImage: "url('/landing_photos/IMG_8898.jpg')" }}
@@ -35,7 +35,7 @@ function App() {
       <div className='pointer-events-none absolute inset-0 bg-black/20' />
       <div className='pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_50%,rgba(0,0,0,0.6)_100%)]' />
 
-      <div className='relative z-10 h-full flex flex-col mb-1'>
+      <div className='relative z-10 h-full flex flex-col pt-[env(safe-area-inset-top)]'>
         <div className='flex-1 flex justify-center text-center px-6'>
           <div className='mt-20'>
             <p className='text-white/80 tracking-[0.3em] text-[10px] mb-2'>
@@ -57,7 +57,7 @@ function App() {
           </div>
         </div>
 
-        <div className='px-6 pb-8'>
+        <div className='px-6 pb-[max(2rem,env(safe-area-inset-bottom))]'>
           <div className='text-center text-white/80 text-xs'>
             Kepada Yth. Bapak/Ibu/Saudara/i
           </div>
