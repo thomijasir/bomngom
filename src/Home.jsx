@@ -1,0 +1,325 @@
+import { motion } from 'motion/react';
+
+const Home = () => {
+  const images = [
+    '/landing_photos/IMG_0374.jpg',
+    '/landing_photos/IMG_0710.jpg',
+    '/landing_photos/IMG_0748.jpg',
+    '/landing_photos/IMG_0757.jpg',
+    '/landing_photos/IMG_0928.jpg',
+    '/landing_photos/IMG_2288.jpg',
+    '/landing_photos/IMG_2828.jpg',
+    '/landing_photos/IMG_2834.jpg',
+    '/landing_photos/IMG_2938.jpg',
+    '/landing_photos/IMG_4485.jpg',
+    '/landing_photos/IMG_9092.jpg',
+  ];
+
+  const story = [
+    {
+      year: '2023',
+      text: 'Awal pertama bertemu di kedai kopi ekman, kala itu yasmin pulang dari kampusnya, dan memesan 2 telor rebus setengah matang',
+    },
+    {
+      year: '2024',
+      text: 'Tahun 2024, adalah tahun yang sulit karena thomi harus melanjutkan pekerjaannya di singapore, hingga menjalani LDR',
+    },
+    {
+      year: '2025',
+      text: 'Memutuskan untuk menyegerakan pernikahan kami, untuk mempersiapkan perjalanan yang diridhai allah',
+    },
+  ];
+
+  const fadeIn = (direction = 'bottom', delay = 0) => {
+    const dist = 32;
+    let x = 0;
+    let y = 0;
+    if (direction === 'left') x = -dist;
+    if (direction === 'right') x = dist;
+    if (direction === 'top') y = -dist;
+    if (direction === 'bottom') y = dist;
+    return {
+      hidden: { opacity: 0, x, y },
+      show: {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        transition: { duration: 0.6, ease: 'easeOut', delay },
+      },
+    };
+  };
+
+  const dirFor = (i) =>
+    i % 3 === 0 ? 'left' : i % 3 === 1 ? 'right' : 'bottom';
+
+  return (
+    <div className='max-w-sm mx-auto px-5 py-12 space-y-16'>
+      {/* Invitation Header */}
+      <motion.section
+        variants={fadeIn('bottom', 0)}
+        initial='hidden'
+        whileInView='show'
+        viewport={{ once: true, amount: 0.3 }}
+        className='text-center space-y-2'
+      >
+        <p className='text-sm text-gray-600'>Kepada Yth. Bapak/Ibu/Saudara/i</p>
+        <p className='text-xl font-semibold font-display'>Tamu Undangan</p>
+      </motion.section>
+
+      {/* Opening / Greeting */}
+      <motion.section
+        variants={fadeIn('bottom', 0.05)}
+        initial='hidden'
+        whileInView='show'
+        viewport={{ once: true, amount: 0.3 }}
+        className='space-y-3 text-center'
+      >
+        <h2 className='font-display text-2xl'>
+          Assalamualaikum Warahmatullahi Wabarakatuh
+        </h2>
+        <p className='text-sm leading-relaxed text-gray-700'>
+          Dengan memohon rahmat dan ridha Allah Subhanahu Wa Ta'ala, kami
+          mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan kami.
+        </p>
+        <p className='font-script text-3xl text-gray-900'>Thomi Jasir</p>
+        <p className='text-sm text-gray-500'>&</p>
+        <p className='font-script text-3xl text-gray-900'>Shafira Yasmin</p>
+        <p className='text-sm text-gray-600'>22 . 09 . 2025</p>
+        <img
+          src='/landing_photos/IMG_8233.jpg'
+          alt='Pasangan'
+          className='w-full object-cover rounded-lg'
+        />
+      </motion.section>
+
+      {/* Verse card */}
+      <motion.section
+        variants={fadeIn('bottom', 0.05)}
+        initial='hidden'
+        whileInView='show'
+        viewport={{ once: true, amount: 0.3 }}
+        className='bg-white rounded-2xl shadow-sm overflow-hidden -mt-4'
+      >
+        <div className='p-5 text-center'>
+          <blockquote className='italic text-gray-700 leading-relaxed'>
+            “Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia menciptakan
+            pasangan-pasangan untukmu dari (jenis) dirimu sendiri agar kamu
+            merasa tenteram kepadanya. Dia menjadikan di antaramu rasa cinta dan
+            kasih sayang.”
+          </blockquote>
+          <div className='mt-2 text-xs tracking-widest text-gray-500'>
+            Q.S. Ar-Rum : 21
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Bride & Groom */}
+      <motion.section
+        variants={fadeIn('bottom', 0.05)}
+        initial='hidden'
+        whileInView='show'
+        viewport={{ once: true, amount: 0.3 }}
+        className='space-y-6'
+      >
+        <h2 className='font-display text-center text-2xl'>Pengantin</h2>
+        <div className='space-y-4'>
+          {/* Bride */}
+          <motion.div
+            variants={fadeIn('left', 0.05)}
+            initial='hidden'
+            whileInView='show'
+            viewport={{ once: true, amount: 0.3 }}
+            className='relative rounded-2xl overflow-hidden shadow-sm'
+          >
+            <img
+              src='/landing_photos/IMG_2288.jpg'
+              alt='Shafira Yasmin'
+              className='w-full h-96 object-cover'
+            />
+            <div className='absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent' />
+            <div className='absolute inset-x-0 bottom-0 p-4 text-white'>
+              <div className='font-script text-3xl leading-none'>
+                Shafira Yasmin
+              </div>
+              <div className='mt-2 text-sm text-white/90'>
+                Putri pertama dari Bapak Sambodo dan Ibu Devi Yasmine
+              </div>
+            </div>
+            <div className='absolute left-2 top-2 bg-white/85 text-gray-800 text-[11px] px-2 py-1 rounded-full ring-1 ring-black/10'>
+              The Bride
+            </div>
+          </motion.div>
+
+          {/* Groom */}
+          <motion.div
+            variants={fadeIn('right', 0.1)}
+            initial='hidden'
+            whileInView='show'
+            viewport={{ once: true, amount: 0.3 }}
+            className='relative rounded-2xl overflow-hidden shadow-sm text-right'
+          >
+            <img
+              src='/landing_photos/IMG_0748.jpg'
+              alt='Thomi Jasir'
+              className='w-full h-96 object-cover scale-125'
+            />
+            <div className='absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent' />
+            <div className='absolute inset-x-0 bottom-0 p-4 text-white'>
+              <div className='font-script text-3xl leading-none'>
+                Thomi Jasir
+              </div>
+              <div className='mt-2 text-sm text-white/90'>
+                Putra pertama dari Bapak Agus dan Ibu Nike
+              </div>
+            </div>
+            <div className='absolute left-2 top-2 bg-white/85 text-gray-800 text-[11px] px-2 py-1 rounded-full ring-1 ring-black/10'>
+              The Groom
+            </div>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* Our Story / Timeline */}
+      <motion.section
+        variants={fadeIn('bottom', 0.05)}
+        initial='hidden'
+        whileInView='show'
+        viewport={{ once: true, amount: 0.3 }}
+        className='space-y-4'
+      >
+        <h2 className='font-display text-center text-2xl'>Kisah Kami</h2>
+        <div className='space-y-3'>
+          {story.map((s, i) => (
+            <motion.div
+              key={i}
+              variants={fadeIn(i % 2 === 0 ? 'left' : 'right', 0)}
+              initial='hidden'
+              whileInView='show'
+              viewport={{ once: true, amount: 0.3 }}
+              className='bg-white rounded-xl p-4 shadow-sm'
+            >
+              <div className='font-display text-lg'>{s.year}</div>
+              <p className='text-sm text-gray-700'>{s.text}</p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
+
+      {/* Event */}
+      <motion.section
+        variants={fadeIn('bottom', 0.05)}
+        initial='hidden'
+        whileInView='show'
+        viewport={{ once: true, amount: 0.3 }}
+        className='space-y-4'
+      >
+        <h2 className='font-display text-center text-2xl'>Acara Kami</h2>
+        <div className='bg-white rounded-2xl p-5 shadow-sm space-y-3'>
+          <div>
+            <div className='text-sm text-gray-600'>Senin</div>
+            <div className='font-display text-xl'>22 September 2025</div>
+            <div className='text-sm text-gray-600'>08.00 WIB</div>
+          </div>
+          <div>
+            <div className='font-medium'>Masjid Agung Al Ukuwwah</div>
+            <div className='text-sm text-gray-600'>
+              Jalan Wastukencana No.27, Bandung
+            </div>
+          </div>
+          <a
+            href='https://maps.app.goo.gl/8rAmXn8E4Nwk2ovN8'
+            target='_blank'
+            rel='noreferrer'
+            className='inline-block w-full text-center py-2 rounded-full border border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-colors'
+          >
+            Google Maps
+          </a>
+        </div>
+      </motion.section>
+
+      {/* Gallery - Masonry with CSS columns */}
+      <motion.section
+        variants={fadeIn('bottom', 0.05)}
+        initial='hidden'
+        whileInView='show'
+        viewport={{ once: true, amount: 0.2 }}
+        className='space-y-4'
+      >
+        <h2 className='font-display text-center text-2xl'>Galeri</h2>
+        <div className='columns-2 gap-2 [column-fill:_balance]'>
+          {images.map((src, i) => (
+            <motion.img
+              key={i}
+              variants={fadeIn(dirFor(i), i * 0.03)}
+              initial='hidden'
+              whileInView='show'
+              viewport={{ once: true, amount: 0.15 }}
+              src={src}
+              alt={`Galeri ${i + 1}`}
+              className='mb-2 w-full rounded-lg shadow-sm break-inside-avoid'
+            />
+          ))}
+        </div>
+      </motion.section>
+
+      {/* Gift */}
+      <motion.section
+        variants={fadeIn('bottom', 0.05)}
+        initial='hidden'
+        whileInView='show'
+        viewport={{ once: true, amount: 0.3 }}
+        className='space-y-4'
+      >
+        <h2 className='font-display text-center text-2xl'>Kirim Hadiah</h2>
+        <p className='text-sm text-center text-gray-700'>
+          Kehadiran Bapak/Ibu/Saudara/i merupakan hadiah terindah.
+        </p>
+        <div className='grid grid-cols-1 gap-3'>
+          <motion.div
+            variants={fadeIn('left', 0)}
+            initial='hidden'
+            whileInView='show'
+            viewport={{ once: true, amount: 0.3 }}
+            className='bg-white rounded-xl p-4 shadow-sm'
+          >
+            <div className='font-medium'>Shafira Yasmin</div>
+            <div className='text-sm text-gray-600'>Bank BSI</div>
+            <div className='text-sm tracking-wider'>7110 0324 33</div>
+          </motion.div>
+          <motion.div
+            variants={fadeIn('right', 0.05)}
+            initial='hidden'
+            whileInView='show'
+            viewport={{ once: true, amount: 0.3 }}
+            className='bg-white rounded-xl p-4 shadow-sm'
+          >
+            <div className='font-medium'>Thomi Jasir</div>
+            <div className='text-sm text-gray-600'>Bank BCA</div>
+            <div className='text-sm tracking-wider'>8090 2224 91</div>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* Closing */}
+      <motion.section
+        variants={fadeIn('bottom', 0.05)}
+        initial='hidden'
+        whileInView='show'
+        viewport={{ once: true, amount: 0.3 }}
+        className='text-center space-y-3'
+      >
+        <h2 className='font-display text-2xl'>Terima Kasih</h2>
+        <p className='text-sm text-gray-700'>
+          Menjadi kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i dapat hadir
+          di acara pernikahan kami.
+        </p>
+        <p className='text-sm text-gray-700'>
+          Terima kasih atas segala ucapan, doa, dan perhatian yang diberikan.
+          Sampai jumpa di hari pernikahan kami.
+        </p>
+      </motion.section>
+    </div>
+  );
+};
+
+export default Home;

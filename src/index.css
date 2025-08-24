@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+html, body {
+  background-color: #EEE8DC;
+}
+
+:root {
+  --font-display: "Playfair Display", ui-serif, Georgia, serif;
+  --font-body: "Lora", ui-serif, Georgia, serif;
+  --font-script: "Great Vibes", cursive;
+}
+
+body {
+  font-family: var(--font-body);
+  color: #1f2937; /* gray-800 */
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-script {
+  font-family: var(--font-script);
+}
