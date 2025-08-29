@@ -55,7 +55,7 @@ const Home = () => {
     '/landing_photos/IMG_2288.jpg',
     '/landing_photos/IMG_3475.jpg',
     '/landing_photos/IMG_0928.jpg',
-    '/landing_photos/IMG_2828.jpg',
+    '/landing_photos/IMG_3456.jpg',
     '/landing_photos/IMG_2834.jpg',
     '/landing_photos/IMG_2938.jpg',
     '/landing_photos/IMG_4485.jpg',
@@ -242,11 +242,11 @@ const Home = () => {
             className='relative rounded-2xl overflow-hidden shadow-sm'
           >
             <img
-              src='/landing_photos/IMG_2833.jpg'
+              src='/landing_photos/IMG_6788.jpg'
               alt='Shafira Yasmin'
               className='w-full h-96 object-cover'
             />
-            <div className='absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent' />
+            <div className='absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent' />
             <div className='absolute inset-x-0 bottom-0 p-4 text-white'>
               <div className='font-script text-3xl leading-none'>
                 Shafira Yasmin
@@ -269,11 +269,11 @@ const Home = () => {
             className='relative rounded-2xl overflow-hidden shadow-sm text-right'
           >
             <img
-              src='/landing_photos/IMG_0748.jpg'
+              src='/landing_photos/IMG_0987.jpg'
               alt='Thomi Jasir'
               className='w-full h-96 object-cover scale-125'
             />
-            <div className='absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent' />
+            <div className='absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent' />
             <div className='absolute inset-x-0 bottom-0 p-4 text-white'>
               <div className='font-script text-3xl leading-none'>
                 Thomi Jasir
