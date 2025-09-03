@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import Home from './Home';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from './LanguageSwitcher.jsx';
 function App() {
   // Set Invitation Open
   const [open, setOpen] = useState(false);
+  const { t, i18n } = useTranslation();
   const [audio] = useState(() => {
     const a = new Audio('/bg_music.mp3');
     a.preload = 'auto';
@@ -22,12 +25,18 @@ function App() {
   };
 
   if (open) {
-    return <Home />;
+    return (
+      <>
+        <LanguageSwitcher />
+        <Home />
+      </>
+    );
   }
 
   // Section Home
   return (
     <div className='relative h-[calc(100dvh-env(safe-area-inset-bottom))] w-full max-w-md mx-auto overflow-hidden'>
+      <LanguageSwitcher />
       <div
         className='absolute inset-0 bg-cover bg-center bg-no-repeat'
         style={{ backgroundImage: "url('/landing_photos/IMG_8898.jpg')" }}
@@ -39,13 +48,15 @@ function App() {
         <div className='flex-1 flex justify-center text-center px-6'>
           <div className='mt-20'>
             <p className='text-white/80 tracking-[0.3em] text-[10px] mb-2'>
-              THE WEDDING OF
+              {t('landing.theWeddingOf')}
             </p>
             <h1
               className='text-white text-4xl leading-tight'
               style={{ fontFamily: '"Great Vibes", cursive' }}
             >
-              Shafira Yasmin
+              {i18n.language.startsWith('cn')
+                ? 'Shafira Yasmin | 林莎雅茵'
+                : 'Shafira Yasmin'}
             </h1>
             <h2 className='text-white/90 text-xl font-medium my-1'>&</h2>
             <h1
@@ -59,16 +70,16 @@ function App() {
 
         <div className='px-6 pb-[max(2rem,env(safe-area-inset-bottom))]'>
           <div className='text-center text-white/80 text-xs'>
-            Kepada Yth. Bapak/Ibu/Saudara/i
+            {t('landing.inviteeSmall')}
           </div>
           <div className='text-center text-white text-lg font-semibold mb-4'>
-            Tamu Undangan
+            {t('landing.invitee')}
           </div>
           <button
             onClick={handleOpen}
             className='w-full py-3 rounded-full font-bold border border-white/80 text-white hover:bg-white/10 transition-colors'
           >
-            OPEN INVITATION
+            {t('landing.openInvitation')}
           </button>
         </div>
       </div>

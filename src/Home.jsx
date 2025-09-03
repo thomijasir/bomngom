@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
+import { useTranslation } from 'react-i18next';
 
 // Inline icons
 const IconCalendar = ({ className = 'w-4 h-4' }) => (
@@ -49,6 +50,7 @@ const IconMapPin = ({ className = 'w-4 h-4' }) => (
 );
 
 const Home = () => {
+  const { t, i18n } = useTranslation();
   const images = [
     '/landing_photos/IMG_8843.jpg',
     '/landing_photos/IMG_0710.jpg',
@@ -63,20 +65,7 @@ const Home = () => {
     '/landing_photos/IMG_0123.jpg',
   ];
 
-  const story = [
-    {
-      year: '2023',
-      text: 'Awal pertemuan Thomi dan Yasmin di kedai kopi eyckman dan saling mengenal diri masing". Karena keselerasannya, akhirnya mereka memutuskan untuk menjalin hubungan',
-    },
-    {
-      year: '2024',
-      text: 'Tahun 2024, adalah tahun yang sulit karena thomi harus melanjutkan pekerjaannya di singapore, hingga menjalani LDR',
-    },
-    {
-      year: '2025',
-      text: 'Memutuskan untuk menyegerakan akad nikah kami, untuk mempersiapkan perjalanan yang diridhai allah',
-    },
-  ];
+  const story = t('story.timeline', { returnObjects: true });
 
   const fadeIn = (direction = 'bottom', delay = 0) => {
     const dist = 32;
@@ -138,8 +127,10 @@ const Home = () => {
         viewport={{ once: true, amount: 0.3 }}
         className='text-center space-y-2'
       >
-        <p className='text-sm text-gray-600'>Kepada Yth. Bapak/Ibu/Saudara/i</p>
-        <p className='text-xl font-semibold font-display'>Tamu Undangan</p>
+        <p className='text-sm text-gray-600'>{t('header.inviteeSmall')}</p>
+        <p className='text-xl font-semibold font-display'>
+          {t('header.invitee')}
+        </p>
       </motion.section>
 
       {/* Opening / Greeting */}
@@ -150,17 +141,18 @@ const Home = () => {
         viewport={{ once: true, amount: 0.3 }}
         className='space-y-3 text-center'
       >
-        <h2 className='font-display text-2xl'>
-          Assalamualaikum Warahmatullahi Wabarakatuh
-        </h2>
+        <h2 className='font-display text-2xl'>{t('greeting.salutation')}</h2>
         <p className='text-sm leading-relaxed text-gray-700'>
-          Dengan memohon rahmat dan ridha Allah Subhanahu Wa Ta'ala, kami
-          mengundang Bapak/Ibu/Saudara/i untuk hadir pada akad kami.
+          {t('greeting.inviteText')}
         </p>
-        <p className='font-script text-3xl text-gray-900'>Shafira Yasmin</p>
+        <p className='font-script text-3xl text-gray-900'>
+          {i18n.language.startsWith('cn')
+            ? 'Shafira Yasmin | 林莎雅茵'
+            : 'Shafira Yasmin'}
+        </p>
         <p className='text-sm text-gray-500'>&</p>
         <p className='font-script text-3xl text-gray-900'>Thomi Jasir</p>
-        <p className='text-sm text-gray-600'>22 . 09 . 2025</p>
+        <p className='text-sm text-gray-600'>{t('greeting.date')}</p>
         <img
           src='/landing_photos/IMG_8233.jpg'
           alt='Pasangan'
@@ -178,13 +170,10 @@ const Home = () => {
       >
         <div className='p-5 text-center'>
           <blockquote className='italic text-gray-700 leading-relaxed'>
-            “Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia menciptakan
-            pasangan-pasangan untukmu dari (jenis) dirimu sendiri agar kamu
-            merasa tenteram kepadanya. Dia menjadikan di antaramu rasa cinta dan
-            kasih sayang.”
+            {t('verse.text')}
           </blockquote>
           <div className='mt-2 text-xs tracking-widest text-gray-500'>
-            Q.S. Ar-Rum : 21
+            {t('verse.source')}
           </div>
         </div>
       </motion.section>
@@ -197,13 +186,15 @@ const Home = () => {
         viewport={{ once: true, amount: 0.3 }}
         className='space-y-3'
       >
-        <h2 className='font-display text-center text-2xl'>Hitung Mundur</h2>
+        <h2 className='font-display text-center text-2xl'>
+          {t('countdown.title')}
+        </h2>
         <div className='grid grid-cols-4 gap-2'>
           {[
-            { label: 'Hari', value: remaining.d },
-            { label: 'Jam', value: pad(remaining.h) },
-            { label: 'Menit', value: pad(remaining.m) },
-            { label: 'Detik', value: pad(remaining.s) },
+            { label: t('countdown.days'), value: remaining.d },
+            { label: t('countdown.hours'), value: pad(remaining.h) },
+            { label: t('countdown.minutes'), value: pad(remaining.m) },
+            { label: t('countdown.seconds'), value: pad(remaining.s) },
           ].map((item, i) => (
             <motion.div
               key={item.label}
@@ -219,7 +210,7 @@ const Home = () => {
           ))}
         </div>
         <div className='text-center text-xs text-gray-500'>
-          Menuju 22 September 2025 pukul 08.00 WIB
+          {t('countdown.footer')}
         </div>
       </motion.section>
 
@@ -231,7 +222,9 @@ const Home = () => {
         viewport={{ once: true, amount: 0.3 }}
         className='space-y-6'
       >
-        <h2 className='font-display text-center text-2xl'>Pengantin</h2>
+        <h2 className='font-display text-center text-2xl'>
+          {t('couple.title')}
+        </h2>
         <div className='space-y-4'>
           {/* Bride */}
           <motion.div
@@ -249,14 +242,16 @@ const Home = () => {
             <div className='absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent' />
             <div className='absolute inset-x-0 bottom-0 p-4 text-white'>
               <div className='font-script text-3xl leading-none'>
-                Shafira Yasmin
+                {i18n.language.startsWith('cn')
+                  ? 'Shafira Yasmin | 林莎雅茵'
+                  : 'Shafira Yasmin'}
               </div>
               <div className='mt-2 text-sm text-white/90'>
-                Putri pertama dari Bapak Sambodo dan Ibu Devie
+                {t('couple.brideParents')}
               </div>
             </div>
             <div className='absolute left-2 top-2 bg-white/85 text-gray-800 text-[11px] px-2 py-1 rounded-full ring-1 ring-black/10'>
-              The Bride
+              {t('couple.brideTag')}
             </div>
           </motion.div>
 
@@ -279,11 +274,11 @@ const Home = () => {
                 Thomi Jasir
               </div>
               <div className='mt-2 text-sm text-white/90'>
-                Putra pertama dari Bapak Agus dan Ibu Ineke
+                {t('couple.groomParents')}
               </div>
             </div>
             <div className='absolute left-2 top-2 bg-white/85 text-gray-800 text-[11px] px-2 py-1 rounded-full ring-1 ring-black/10'>
-              The Groom
+              {t('couple.groomTag')}
             </div>
           </motion.div>
         </div>
@@ -297,7 +292,9 @@ const Home = () => {
         viewport={{ once: true, amount: 0.3 }}
         className='space-y-4'
       >
-        <h2 className='font-display text-center text-2xl'>Kisah Kami</h2>
+        <h2 className='font-display text-center text-2xl'>
+          {t('story.title')}
+        </h2>
         <div className='space-y-3'>
           {story.map((s, i) => (
             <motion.div
@@ -323,26 +320,26 @@ const Home = () => {
         viewport={{ once: true, amount: 0.3 }}
         className='space-y-4'
       >
-        <h2 className='font-display text-center text-2xl'>Akad Nikah Kami</h2>
+        <h2 className='font-display text-center text-2xl'>
+          {t('event.title')}
+        </h2>
         <div className='bg-white rounded-2xl p-5 shadow-sm space-y-3'>
           <div className='space-y-1'>
             <div className='flex items-center gap-2 text-sm text-gray-700'>
               <IconCalendar className='w-4 h-4' />
-              <span>Senin, 22 September 2025</span>
+              <span>{t('event.date')}</span>
             </div>
             <div className='flex items-center gap-2 text-sm text-gray-700'>
               <IconClock className='w-4 h-4' />
-              <span>08.00 WIB</span>
+              <span>{t('event.time')}</span>
             </div>
           </div>
           <div className='space-y-1'>
             <div className='flex items-center gap-2 font-medium'>
               <IconMapPin className='w-4 h-4' />
-              <span>Al-Ukhuwwah Great Mosque</span>
+              <span>{t('event.venue')}</span>
             </div>
-            <div className='text-sm text-gray-600'>
-              Jalan Wastukencana No.27, Bandung
-            </div>
+            <div className='text-sm text-gray-600'>{t('event.address')}</div>
           </div>
           <a
             href='https://maps.app.goo.gl/8rAmXn8E4Nwk2ovN8'
@@ -351,7 +348,7 @@ const Home = () => {
             className='inline-flex items-center justify-center gap-2 w-full text-center py-2 rounded-full border border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-colors'
           >
             <IconMapPin className='w-4 h-4' />
-            Google Maps
+            {t('event.maps')}
           </a>
           <a
             href={googleCalUrl}
@@ -360,7 +357,7 @@ const Home = () => {
             className='inline-flex items-center justify-center gap-2 w-full text-center py-2 rounded-full border border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-colors'
           >
             <IconCalendar className='w-4 h-4' />
-            Tambah ke Google Calendar
+            {t('event.addToCalendar')}
           </a>
         </div>
       </motion.section>
@@ -373,7 +370,9 @@ const Home = () => {
         viewport={{ once: true, amount: 0.2 }}
         className='space-y-4'
       >
-        <h2 className='font-display text-center text-2xl'>Galeri</h2>
+        <h2 className='font-display text-center text-2xl'>
+          {t('gallery.title')}
+        </h2>
         <div className='columns-2 gap-2 [column-fill:_balance]'>
           {images.map((src, i) => (
             <motion.img
@@ -383,7 +382,7 @@ const Home = () => {
               whileInView='show'
               viewport={{ once: true, amount: 0.15 }}
               src={src}
-              alt={`Galeri ${i + 1}`}
+              alt={t('gallery.itemAlt', { index: i + 1 })}
               className='mb-2 w-full rounded-lg shadow-sm break-inside-avoid'
             />
           ))}
@@ -398,10 +397,8 @@ const Home = () => {
         viewport={{ once: true, amount: 0.3 }}
         className='space-y-4'
       >
-        <h2 className='font-display text-center text-2xl'>Kirim Hadiah</h2>
-        <p className='text-sm text-center text-gray-700'>
-          Kehadiran Bapak/Ibu/Saudara/i merupakan hadiah terindah.
-        </p>
+        <h2 className='font-display text-center text-2xl'>{t('gift.title')}</h2>
+        <p className='text-sm text-center text-gray-700'>{t('gift.text')}</p>
         <div className='grid grid-cols-1 gap-3'>
           <motion.div
             variants={fadeIn('left', 0)}
@@ -425,6 +422,17 @@ const Home = () => {
             <div className='text-sm text-gray-600'>Bank BCA</div>
             <div className='text-sm tracking-wider'>8090 2224 91</div>
           </motion.div>
+          <motion.div
+            variants={fadeIn('right', 0.05)}
+            initial='hidden'
+            whileInView='show'
+            viewport={{ once: true, amount: 0.3 }}
+            className='bg-white rounded-xl p-4 shadow-sm'
+          >
+            <div className='font-medium'>Thomi Jasir</div>
+            <div className='text-sm text-gray-600'>PayNow</div>
+            <div className='text-sm tracking-wider'>8158 4771</div>
+          </motion.div>
         </div>
       </motion.section>
 
@@ -436,15 +444,9 @@ const Home = () => {
         viewport={{ once: true, amount: 0.3 }}
         className='text-center space-y-3'
       >
-        <h2 className='font-display text-2xl'>Terima Kasih</h2>
-        <p className='text-sm text-gray-700'>
-          Menjadi kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i dapat hadir
-          di acara akad nikah kami.
-        </p>
-        <p className='text-sm text-gray-700'>
-          Terima kasih atas segala ucapan, doa, dan perhatian yang diberikan.
-          Sampai jumpa di hari akad nikah kami.
-        </p>
+        <h2 className='font-display text-2xl'>{t('closing.title')}</h2>
+        <p className='text-sm text-gray-700'>{t('closing.text1')}</p>
+        <p className='text-sm text-gray-700'>{t('closing.text2')}</p>
       </motion.section>
     </div>
   );
