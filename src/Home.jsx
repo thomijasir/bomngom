@@ -157,9 +157,9 @@ const Home = () => {
           Dengan memohon rahmat dan ridha Allah Subhanahu Wa Ta'ala, kami
           mengundang Bapak/Ibu/Saudara/i untuk hadir pada akad kami.
         </p>
-        <p className='font-script text-3xl text-gray-900'>Thomi Jasir</p>
-        <p className='text-sm text-gray-500'>&</p>
         <p className='font-script text-3xl text-gray-900'>Shafira Yasmin</p>
+        <p className='text-sm text-gray-500'>&</p>
+        <p className='font-script text-3xl text-gray-900'>Thomi Jasir</p>
         <p className='text-sm text-gray-600'>22 . 09 . 2025</p>
         <img
           src='/landing_photos/IMG_8233.jpg'
