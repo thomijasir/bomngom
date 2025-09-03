@@ -45,14 +45,14 @@ function App() {
               className='text-white text-4xl leading-tight'
               style={{ fontFamily: '"Great Vibes", cursive' }}
             >
-              Thomi Jasir
+              Shafira Yasmin
             </h1>
             <h2 className='text-white/90 text-xl font-medium my-1'>&</h2>
             <h1
               className='text-white text-4xl leading-tight'
               style={{ fontFamily: '"Great Vibes", cursive' }}
             >
-              Shafira Yasmin
+              Thomi Jasir
             </h1>
           </div>
         </div>
