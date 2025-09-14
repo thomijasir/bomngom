@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import i18n from './i18n';
+import { useLocation, useNavigate } from 'react-router';
 
 const langs = [
   { code: 'id', label: 'ID' },
@@ -8,8 +9,7 @@ const langs = [
   { code: 'ta', label: 'TA' },
 ];
 
-function buildPathFor(lng) {
-  const { pathname, search, hash } = window.location;
+function buildPathFor(lng, pathname, search, hash) {
   const segs = pathname.split('/').filter(Boolean);
   const first = segs[0];
   const hasPrefix = first === 'en' || first === 'cn' || first === 'ta';
@@ -20,7 +20,6 @@ function buildPathFor(lng) {
   } else {
     target = `/${lng}`;
   }
-  // If you ever add deeper routes, preserve them
   if (hasPrefix && segs.length > 1) {
     target += `/${segs.slice(1).join('/')}`;
   } else if (!hasPrefix && pathname !== '/') {
@@ -30,14 +29,18 @@ function buildPathFor(lng) {
 }
 
 export default function LanguageSwitcher() {
-  const onSwitch = useCallback((lng) => {
-    try {
-      i18n.changeLanguage(lng);
-    } catch {}
-    const newPath = buildPathFor(lng);
-    // Avoid full reload; update URL for shareability
-    window.history.replaceState(null, '', newPath);
-  }, []);
+  const navigate = useNavigate();
+  const { pathname, search, hash } = useLocation();
+  const onSwitch = useCallback(
+    (lng) => {
+      try {
+        i18n.changeLanguage(lng);
+      } catch {}
+      const newPath = buildPathFor(lng, pathname, search, hash);
+      navigate(newPath, { replace: true });
+    },
+    [navigate, pathname, search, hash]
+  );
 
   const current = (i18n.language || 'id').slice(0, 2);
 

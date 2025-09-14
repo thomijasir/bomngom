@@ -1,11 +1,34 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Home from './Home';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from './LanguageSwitcher.jsx';
+import { useLocation, useSearchParams } from 'react-router';
 function App() {
   // Set Invitation Open
   const [open, setOpen] = useState(false);
   const { t, i18n } = useTranslation();
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
+
+  // Extract optional guest name from query param `to`
+  const guestName = useMemo(() => {
+    const raw = searchParams.get('to');
+    if (!raw) return '';
+    // Convert "+" to spaces for nicer names in URLs
+    const name = raw.replace(/\+/g, ' ').trim();
+    return name;
+  }, [searchParams]);
+
+  // Keep i18n language in sync with the URL prefix
+  useEffect(() => {
+    const seg = location.pathname.split('/').filter(Boolean)[0];
+    const lng = seg === 'en' || seg === 'cn' || seg === 'ta' ? seg : 'id';
+    if (!i18n.language?.startsWith(lng)) {
+      try {
+        i18n.changeLanguage(lng);
+      } catch {}
+    }
+  }, [location.pathname, i18n]);
   const [audio] = useState(() => {
     const a = new Audio('/bg_music.mp3');
     a.preload = 'auto';
@@ -28,7 +51,7 @@ function App() {
     return (
       <>
         <LanguageSwitcher />
-        <Home />
+        <Home guestName={guestName} />
       </>
     );
   }
@@ -73,7 +96,7 @@ function App() {
             {t('landing.inviteeSmall')}
           </div>
           <div className='text-center text-white text-lg font-semibold mb-4'>
-            {t('landing.invitee')}
+            {guestName ? `${t('landing.invitee')} ${guestName}` : t('landing.invitee')}
           </div>
           <button
             onClick={handleOpen}

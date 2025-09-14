@@ -49,7 +49,7 @@ const IconMapPin = ({ className = 'w-4 h-4' }) => (
   </svg>
 );
 
-const Home = () => {
+const Home = ({ guestName = '' }) => {
   const { t, i18n } = useTranslation();
   const images = [
     '/landing_photos/IMG_8843.jpg',
@@ -129,7 +129,7 @@ const Home = () => {
       >
         <p className='text-sm text-gray-600'>{t('header.inviteeSmall')}</p>
         <p className='text-xl font-semibold font-display'>
-          {t('header.invitee')}
+          {guestName ? `${t('header.invitee')} ${guestName}` : t('header.invitee')}
         </p>
       </motion.section>
 
